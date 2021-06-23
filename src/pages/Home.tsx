@@ -5,8 +5,15 @@ import logoImg from '../assets/images/logo.svg'
 import googleImg from '../assets/images/google-icon.svg'
 
 import { Button } from '../components/Button'
+import { useHistory } from 'react-router-dom'
 
 export function Home() {
+  const history = useHistory()
+
+  function navigateToNew() {
+    history.push('/room/new')
+  }
+
   return (
     <div id="page-auth">
       <aside>
