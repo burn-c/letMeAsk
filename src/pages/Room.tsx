@@ -4,6 +4,7 @@ import { useParams } from 'react-router'
 import logoImg from '../assets/images/logo.svg'
 
 import { Button } from '../components/Button'
+import { Question } from '../components/Questions'
 import { RoomCode } from '../components/RoomCode'
 
 import { useAuth } from '../hooks/useAuth'
@@ -12,6 +13,7 @@ import { database } from '../services/firebase'
 import '../styles/room.scss'
 
 type FirebaseQuestion = Record<string, {
+  id: string,
   author: {
     name: string,
     avatar: string;
@@ -21,7 +23,8 @@ type FirebaseQuestion = Record<string, {
   isHighlighted: boolean;
 }>
 
-type Question = {
+type QuestionProps = {
+  id: string,
   author: {
     name: string,
     avatar: string;
@@ -37,7 +40,7 @@ type RoomParams = {
 
 export function Room() {
   const [newQuestion, setNewQuestion] = useState('')
-  const [questions, setQuestions] = useState<Question[]>([])
+  const [questions, setQuestions] = useState<QuestionProps[]>([])
   const [title, setTitle] = useState('')
 
 
@@ -128,6 +131,15 @@ export function Room() {
             <Button type="submit" disabled={!user}>Enviar pergnta</Button>
           </div>
         </form>
+        <div className="question-list">
+          {questions.map(question => (
+            <Question
+              key={question.id}
+              content={question.content}
+              author={question.author}
+            />
+          ))}
+        </div>
       </main>
     </div>
   )
