@@ -17,13 +17,14 @@ export function Home() {
   const { user, signInWithGoogle } = useAuth()
 
   const history = useHistory()
+
   async function handleCreateRoom() {
     console.log(user)
     if (!user) {
       await signInWithGoogle()
     }
 
-    history.push('/room/new')
+    history.push('/admin/room/new')
   }
 
   async function handleJoinRoom(event: FormEvent) {
